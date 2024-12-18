@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import store from "../workoutStore";
-import { SET_GOALS } from "../actions/type";
+import { ADD_GOALS_ACTION } from "../actions";
 
 const Goals = () => {
-  const goals = store.getState().goals;
+  const goals = store.getState().goals.goals;
   const [distance, setDistance] = useState(goals.distance);
   const [weightLoss, setWeightLoss] = useState(goals.weightLoss);
   
@@ -43,13 +43,10 @@ const Goals = () => {
   };
 
   useEffect(() => {
-    store.dispatch({
-      type : SET_GOALS, 
-      payload : {
-        distance : distance, 
-        weightLoss : weightLoss
-      }
-    });
+    store.dispatch(ADD_GOALS_ACTION({
+      distance : distance, 
+      weightLoss : weightLoss
+    }));
   }, [distance, weightLoss]);
   return (
     <div style={containerStyle}>
@@ -59,7 +56,7 @@ const Goals = () => {
           <label style={labelStyle}>Distance Goal (km):</label>
           <input
             type="number"
-            value={goals.distance}
+            value={distance}
             name="distance"
             onChange={(e) => setDistance(e.target.value)}
             style={inputStyle}
@@ -69,7 +66,7 @@ const Goals = () => {
           <label style={labelStyle}>Weight Loss Goal (kg):</label>
           <input
             type="number"
-            value={goals.weightLoss}
+            value={weightLoss}
             name="weightLoss"
             onChange={(e) => setWeightLoss(e.target.value)}
             style={inputStyle}

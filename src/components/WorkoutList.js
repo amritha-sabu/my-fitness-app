@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import store from "../workoutStore";
 
 const WorkoutList = () => {
-  const [workouts, setWorkouts] = useState(store.getState().workouts);
-  const [filter, setFilter] = useState(store.getState().workoutFilter);
+  const [workouts, setWorkouts] = useState(store.getState().workout.workouts);
+  const [filter, setFilter] = useState(store.getState().filter.workoutFilter);
 
   useEffect(() => {
     store.subscribe(() => {
-        setWorkouts(store.getState().workouts);
-        setFilter(store.getState().workoutFilter);
+        setWorkouts(store.getState().workout.workouts);
+        setFilter(store.getState().filter.workoutFilter);
       }
     );
-  }, [workouts]);
+  }, []);
 
   const filteredWorkouts = filter === 'All' ?
   workouts :

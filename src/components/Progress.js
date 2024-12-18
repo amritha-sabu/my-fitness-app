@@ -2,7 +2,7 @@ import React from "react";
 import store from "../workoutStore";
 
 const Progress = () => {
-  const progress = store.getState().progress;
+  const progress = store.getState().progress.progress;
   
   const containerStyle = {
     display: "flex",
