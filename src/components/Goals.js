@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import store from "../workoutStore";
+import { SET_GOALS } from "../actions/type";
 
-const Goals = ({ goals }) => {
+const Goals = () => {
+  const goals = store.getState().goals;
+  const [distance, setDistance] = useState(goals.distance);
+  const [weightLoss, setWeightLoss] = useState(goals.weightLoss);
+  
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -36,11 +42,15 @@ const Goals = ({ goals }) => {
     color: "#333",
   };
 
-  const handleGoalChange = () => {
-    const distance = document.querySelector('input[name="distance"]').value;
-    const weightLoss = document.querySelector('input[name="weightLoss"]').value;
-  };
-
+  useEffect(() => {
+    store.dispatch({
+      type : SET_GOALS, 
+      payload : {
+        distance : distance, 
+        weightLoss : weightLoss
+      }
+    });
+  }, [distance, weightLoss]);
   return (
     <div style={containerStyle}>
       <h2>Set Your Goals</h2>
@@ -51,7 +61,7 @@ const Goals = ({ goals }) => {
             type="number"
             value={goals.distance}
             name="distance"
-            onChange={handleGoalChange}
+            onChange={(e) => setDistance(e.target.value)}
             style={inputStyle}
           />
         </div>
@@ -61,7 +71,7 @@ const Goals = ({ goals }) => {
             type="number"
             value={goals.weightLoss}
             name="weightLoss"
-            onChange={handleGoalChange}
+            onChange={(e) => setWeightLoss(e.target.value)}
             style={inputStyle}
           />
         </div>

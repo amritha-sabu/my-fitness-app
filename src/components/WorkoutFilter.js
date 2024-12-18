@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import store from "../workoutStore";
+import { WORKOUT_FILTER } from "../actions/type";
 
 const WorkoutFilter = () => {
-  const [selectedType, setSelectedType] = useState("All");
+  const [selectedType, setSelectedType] = useState(store.getState().WorkoutFilter);
   const filterTypes = ["All", "Running", "Cycling", "Swimming", "Yoga"]; // Single source of truth for filter types
 
   const handleFilterChange = (type) => {
     setSelectedType(type);
+    store.dispatch({type : WORKOUT_FILTER, payload : type});
   };
 
   return (

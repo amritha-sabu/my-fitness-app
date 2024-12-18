@@ -1,6 +1,9 @@
 import React from "react";
+import store from "../workoutStore";
 
-const Dashboard = ({ progress, goals }) => {
+const Dashboard = () => {
+  const progress = store.getState().progress;
+  const goals = store.getState().goals;
   // Calculate progress percentages
   const distanceProgress = (
     (progress.distanceCovered / (goals.distance || 1)) *

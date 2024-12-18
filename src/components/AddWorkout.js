@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import store from "../workoutStore";
+import { ADD_WORKOUT } from "../actions/type";
 
-const AddWorkout = ({ addWorkout }) => {
+const AddWorkout = () => {
   const [type, setType] = useState("Running");
   const [duration, setDuration] = useState("");
   const [calories, setCalories] = useState("");
@@ -43,7 +45,10 @@ const AddWorkout = ({ addWorkout }) => {
       date: new Date().toISOString().split("T")[0],
     };
 
-    addWorkout(newWorkout);
+    store.dispatch({
+      type : ADD_WORKOUT, 
+      payload : newWorkout
+    });
     setDuration("");
     setCalories("");
   };
