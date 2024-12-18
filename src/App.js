@@ -13,7 +13,7 @@ const App = () => {
   });
   const [goals, setGoals] = useState({
     distance: 100,
-    weightLoss: 10,
+    weightLoss: 5,
   });
 
   // Function to add a workout
