@@ -3,11 +3,13 @@ import store from "../workoutStore";
 import { SET_NEW_FILTER } from "../actions";
 
 const WorkoutFilter = () => {
-  const selectedType = useState(store.getState().filter.WorkoutFilter);
+  const [selectedType, setSelectedType] = useState(store.getState().filter.WorkoutFilter);
   const filterTypes = ["All", "Running", "Cycling", "Swimming", "Yoga"]; // Single source of truth for filter types
 
   const handleFilterChange = (type) => {
     store.dispatch(SET_NEW_FILTER(type));
+    setSelectedType(type);
+    console.log(store.getState().filter.WorkoutFilter);
   };
 
   return (
